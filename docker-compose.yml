@@ -1,0 +1,19 @@
+services:
+  web:
+    image: php:8.3-apache
+    volumes:
+      - ./src:/var/www/html
+    ports:
+      - "8080:80"
+    # PHPからMySQLに接続するための設定を追加
+    depends_on:
+      - db
+
+  db:
+    image: mysql:8.0
+    container_name: dockerlife-db
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: my_database
+    ports:
+      - "3306:3306"
